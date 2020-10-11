@@ -1,6 +1,6 @@
 #import redis
 from flask_redis import FlaskRedis
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
@@ -20,11 +20,17 @@ def queuepush():
 # Pop
 @app.route('/api/queue/pop', methods=['POST'])
 def queuepop():
+	# Preparo el diccionario
 	Response = {}
+	# Recorro todos los valores de Redis
 	for x in redis_client.keys('*'):
-		Response[x] = redis_client.get(x)
+		# TODO: Revisar posible bug de flask_redis en el manejo de Bytes me obliga a reconstruir los resultados manipulando convirtiendo y strings.
+		Value = str(redis_client.get(x))[2:-1]
+		x = str(x)[2:-1]
+		# Agrego valores al diccionario.
+		Response[x] = Value
 	Response['status'] = 'ok'
-	return Response
+	return jsonify(Response)
 
 # Count
 @app.route('/api/queue/count', methods=['GET'])

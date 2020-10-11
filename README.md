@@ -16,8 +16,28 @@ sudo docker build . -t redis-api:v1
 ```
 5. Execute container:
 ``` 
-sudo docker run --rm -d --name Redis-APIv1 -p 8080:8080 redis-api:v1 bash -c "python3 /Redis-API/Redis-API.py"
+sudo docker run --rm -d --name Redis-APIv1 -p 8080:8080 redis-api:v1 bash -c "redis-server & python3 /Redis-API/Redis-API.py"
 ```
+
+## Usage
+
+#### PUSH:
+```
+curl -X POST -i http://localhost:8080/api/queue/push --data 'Escriba su mensaje aqui por favor.'
+```
+- Add new message to the queue.
+
+#### POP:
+```
+curl -X POST -i http://localhost:8080/api/queue/pop
+```
+- Return the whole queue of messages.
+
+### Count:
+```
+curl -X GET -i http://localhost:8080/api/queue/count
+```
+- Return the number of messages in the queue.
 
 ## Maintenance
 
