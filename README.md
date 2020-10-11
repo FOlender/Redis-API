@@ -41,7 +41,7 @@ curl -X GET -i http://localhost:8080/api/queue/count
 
 ## Maintenance
 
-If the container was runned with the "-rm" argument as indicated in step 5 of the installation process, the container will be remove when stoped, so it is highly recommended to generate new images from the running container once in a while to backup the new rules added to it:
+If the container was runned with the "-rm" argument as indicated in step 5 of the installation process, the container will be remove when stoped, so it is highly recommended to generate new images from the running container once in a while to backup the new messages added to the it:
 ```
 # sudo docker commit Redis-API redis-api:v2
 ```
