@@ -3,7 +3,7 @@ FROM ubuntu:latest
 
 # Actualizo e instalo requerimientos.
 RUN apt-get update -y && apt-get upgrade -y && apt-get install python3 python3-pip redis-server -y
-RUN pip3 install flask flask-restful redis
+RUN pip3 install flask flask-restful redis flask_redis
 
 # Copio API.
 RUN mkdir /Redis-API/
