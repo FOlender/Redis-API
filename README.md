@@ -39,6 +39,12 @@ curl -X GET -i http://localhost:8080/api/queue/count
 ```
 - Return the number of messages in the queue.
 
+### Delete All:
+```
+curl -X POST -i http://localhost:8080/api/queue/deleteall
+```
+- Removes every message from the queue.
+
 ## Maintenance
 
 If the container was runned with the "-rm" argument as indicated in step 5 of the installation process, the container will be remove when stoped, so it is highly recommended to generate new images from the running container once in a while to backup the new rules added to it:
@@ -77,6 +83,7 @@ sudo docker exec -i -t Redis-APIv1 /bin/bash
 ## TODO
 
 - [] Replace base image ubuntu:stable with alpine:stable or redis:stable
+- [x] Add RemoveAll endpoint.
 
 ## Issues
 

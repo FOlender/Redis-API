@@ -41,6 +41,18 @@ def queuecount():
 	Response = {'status':'ok', 'count':RedisLength}
 	return Response
 
+
+# DeleteAll
+@app.route('/api/queue/deleteall', methods=['POST'])
+def queuedeleteall():
+	# Calculo cantidad de mensajes
+	RedisLength = len(redis_client.keys('*'))
+	# Elimino todas las entradas.
+	for x in redis_client.keys('*'): redis_client.delete(x)
+	# Envio respuesta en forma de diccionario.
+	Response = {'status':'ok', 'count':RedisLength}
+	return Response
+
 if __name__ == '__main__':
 	redis_client = FlaskRedis(app)
 	app.run(host = '0.0.0.0', port=int("8080"), debug=True) 
