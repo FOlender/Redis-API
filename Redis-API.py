@@ -8,7 +8,9 @@ app = Flask(__name__)
 @app.route('/api/queue/push', methods=['POST'])
 def queuepush():
 	# Capturo Mensaje
-	Mensaje = request.data
+	Mensaje = request.form
+	# TODO: Revisar falla de capturar de mensaje (Resuelto con modificacion del string del Request)
+	Mensaje = str(Mensaje)[22:-8]
 	# Determino longitud de cola de mensajes de Redis
 	RedisLength = len(redis_client.keys('*'))
 	# Agrego el nuevo mensaje a la cola
@@ -24,7 +26,7 @@ def queuepop():
 	Response = {}
 	# Recorro todos los valores de Redis
 	for x in redis_client.keys('*'):
-		# TODO: Revisar posible bug de flask_redis en el manejo de Bytes me obliga a reconstruir los resultados manipulando convirtiendo y strings.
+		# TODO: Revisar posible bug de flask_redis en manejo de Bytes (Resuelto manipulando el string).
 		Value = str(redis_client.get(x))[2:-1]
 		x = str(x)[2:-1]
 		# Agrego valores al diccionario.
@@ -45,4 +47,3 @@ if __name__ == '__main__':
 	redis_client = FlaskRedis(app)
 	app.run(host = '0.0.0.0', port=int("8080"), debug=True) 
 	# Debug se mantiene en True para que el error sea detallado al consumir la API.
-
