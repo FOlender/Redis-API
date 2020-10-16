@@ -74,6 +74,12 @@ git push -u origin main
 sudo docker exec -i -t Redis-APIv1 /bin/bash
 ```
 
+#### What is Redis doing?
+
+```
+sudo docker exec -i -t Redis-APIv1 redis-cli monitor
+```
+
 ## TODO
 
 - [] Replace base image ubuntu:stable with alpine:stable or redis:stable
