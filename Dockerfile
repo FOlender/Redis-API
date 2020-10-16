@@ -14,4 +14,3 @@ RUN chmod 755 /Redis-API/Redis-API.py
 WORKDIR /Redis-API/
 EXPOSE 8080
 CMD [ "python3", "./Redis-API.py" ]
-
