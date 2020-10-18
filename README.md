@@ -8,15 +8,15 @@
 2.  Install [Docker](https://www.docker.io/).
 3.  Pull from Github Repo:
 ```
-mkdir Redis-API && cd Redis-API/ && git init && git pull https://github.com/FOlender/Redis-API.git
+mkdir Redis-API && cd Redis-API/ && git init && git pull https://github.com/FOlender/Redis-API.git v2
 ```
 4.  Run Dockerfile:
 ```
-sudo docker build . -t redis-api:v1
+sudo docker build . -t redis-api:v2
 ```
 5. Execute container:
 ``` 
-sudo docker run --rm -d --name Redis-APIv1 -p 8080:8080 redis-api:v1 bash -c "redis-server & python3 /Redis-API/Redis-API.py"
+sudo docker run --rm -d --name Redis-APIv2 -p 8080:8080 redis-api:v2 bash -c "redis-server & python3 /Redis-API/Redis-API.py"
 ```
 
 ## Usage
