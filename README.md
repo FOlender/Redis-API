@@ -74,13 +74,13 @@ git push -u origin main
 #### Get into the running container to see under the hood...
 
 ```
-sudo docker exec -i  Redis-APIv1 /bin/bash
+sudo docker exec -i  Redis-APIv2 /bin/bash
 ```
 
 #### What is Redis doing?
 
 ```
-sudo docker exec -i -t Redis-APIv1 redis-cli monitor
+sudo docker exec -i -t Redis-APIv2 redis-cli monitor
 ```
 
 ## TODO
