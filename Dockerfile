@@ -15,3 +15,7 @@ WORKDIR /Redis-API/
 EXPOSE 8080
 CMD [ "python3", "./Redis-API.py" ]
 
+# Genero Token Random y notifico
+RUN head /dev/urandom | tr -dc A-Za-z0-9 | head -c 25 > /Redis-API/Token 
+RUN echo "Token de Autentication: " `cat /Redis-API/Token`
+
