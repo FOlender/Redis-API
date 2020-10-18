@@ -111,12 +111,11 @@ def queuepop():
 					logging.debug('Key: ' + str(Key) + ' | Mensaje: ' + Mensaje)
 					Response[Key] = Mensaje
 			else:
-				# DEVOLVER BATCH
 				logging.debug('Batch: ' + msg)
 				msg = msg.split(',')
 				RedisLength = len(redis_client.keys('*'))
 				for x in msg:
-					if x.isnumeric() and int(x) < RedisLength: 
+					if x.isnumeric() and int(x) < int(RedisLength): 
 						Value = redis_client.get(x)
 						Mensaje = Value.decode()
 						logging.debug('Key: ' + x + ' | Mensaje: ' + Mensaje) 
