@@ -108,7 +108,7 @@ Token de Autentication: XXXXXXXXXXXXXXXXXXXXXXXXX
 Adicionalmente pueden visualizar el token en el archivo "/Redis-API/Token" dentro del contenedor en ejecucion:
 
 ```
-sudo docker exec -i Redis-APIv1 cat /Redis-API/Token
+sudo docker exec -i Redis-APIv2 cat /Redis-API/Token
 ```
 
 La autenticacion solamente es forzada cuando se realizan cambios (Agregar mensajes a la cola, eliminar todos los mensajes, etc.) o cuando se accede a endpoints confidenciales (Ej: metrics).
