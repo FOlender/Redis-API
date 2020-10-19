@@ -90,16 +90,16 @@ def queuepop():
 	logging.debug('Method: ' + request.method)
 	# Preparo el diccionario
 	Response = {}
-	
 	# Capturo Body
 	Mensaje = request.form
 	# Si el Body esta vacio, devuelvo el ultimo mensaje de la queue.
 	if not (Mensaje):
 		RedisLength = len(redis_client.keys('*'))-1
-		Value = redis_client.get(RedisLength)
-		Mensaje = Value.decode()
-		logging.debug('Key: ' + str(RedisLength) + ' | Mensaje: ' + Mensaje)
-		Response[RedisLength] = Value
+		if RedisLength > 0:
+			Value = redis_client.get(RedisLength)
+			Mensaje = Value.decode()
+			logging.debug('Key: ' + str(RedisLength) + ' | Mensaje: ' + Mensaje)
+			Response[RedisLength] = Value
 	else:
 	# Si el Body contiene debera ser 'ALL' o un listado de valores numericos separados por coma (Batch).
 		for msg in Mensaje: 
@@ -208,4 +208,3 @@ if __name__ == '__main__':
 	redis_client = FlaskRedis(app)
 	app.run(host = '0.0.0.0', port=int("8080"), debug=FlaskDebug) 
 	# Debug se mantiene en True para que el error sea detallado al consumir la API.
-
