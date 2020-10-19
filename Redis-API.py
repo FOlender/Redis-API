@@ -99,7 +99,7 @@ def queuepop():
 			Value = redis_client.get(RedisLength)
 			Mensaje = Value.decode()
 			logging.debug('Key: ' + str(RedisLength) + ' | Mensaje: ' + Mensaje)
-			Response[RedisLength] = Value
+			Response[str(RedisLength)] = Mensaje
 	else:
 	# Si el Body contiene debera ser 'ALL' o un listado de valores numericos separados por coma (Batch).
 		for msg in Mensaje: 
@@ -117,9 +117,10 @@ def queuepop():
 				for x in msg:
 					if x.isnumeric() and int(x) < int(RedisLength): 
 						Value = redis_client.get(x)
+						Key = x
 						Mensaje = Value.decode()
-						logging.debug('Key: ' + x + ' | Mensaje: ' + Mensaje) 
-						Response[x] = Mensaje
+						logging.debug('Key: ' + str(Key) + ' | Mensaje: ' + Mensaje) 
+						Response[Key] = Mensaje
 	# Metricas
 	Pops.value += 1
 	# Termino de armar la respuesta.
